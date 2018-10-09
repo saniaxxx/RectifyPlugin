@@ -7,8 +7,9 @@ from rectifyConfig import RectifyConfig
 
 @cbpi.step
 class HeartsStep(StepBase):
+    temperatureSensor = StepProperty.Sensor("Temperature sensor", description="Temperature sensor inside pot-still")
+    collectingSensor = StepProperty.Sensor("Collecting indicator", description="Collecting indicator")
     actor = StepProperty.Actor("Actor", description="Collecting device")
-    kettle = StepProperty.Kettle("Kettle", description="Pot-still")
     endTemp = Property.Number("Completion temperature, degree Celsius", configurable=True, default_value=93)
     
     isPaused = False
@@ -35,6 +36,7 @@ class HeartsStep(StepBase):
     def execute(self):
         self.updateAndCheckTemperature()
         self.recountCollecting()
+        self.notifySensor()
         self.calculateActorPower()
         self.manageActor()
 
@@ -54,13 +56,15 @@ class HeartsStep(StepBase):
         T = float(self.temperature)
         W = float(RectifyConfig.heaterPower())
         R = float(RectifyConfig.refluxRatio())
-        Q = K*(100 - T)*W/(R + 1)
-        if abs(self.collecting - Q) > 0:
-            self.notify("", "Now collecting speed is " + str(Q) + "ml/h", type="warning", timeout=2000)
-        self.collecting = Q
+        self.collecting = K*(100 - T)*W/(R + 1)
+
+    def notifySensor(self):
+        sensor = self.api.cache.get("sensors").get(int(self.collectingSensor)).instance
+        if hasattr(sensor, 'collecting'):
+            sensor.collecting = self.collecting
 
     def updateAndCheckTemperature(self):
-        self.temperature = self.get_kettle_temp(self.kettle)
+        self.temperature = self.get_sensor_value(int(self.temperatureSensor))
         if self.temperature >= int(self.endTemp):
             self.next()
 
