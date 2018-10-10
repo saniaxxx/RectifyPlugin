@@ -5,14 +5,14 @@ from modules.core.hardware import  SensorActive
 from modules.core.props import Property
 
 @cbpi.sensor
-class PickingSensor(SensorActive):
-    collecting = 0
+class PowerSensor(SensorActive):
+    power = Property.Number("heater power, Watt", configurable=True, default_value=1000)
 
     def get_unit(self):
         '''
         :return: Unit of the sensor as string. Should not be longer than 3 characters
         '''
-        return "ml/h"
+        return "Watt"
 
     def execute(self):
         '''
@@ -20,5 +20,5 @@ class PickingSensor(SensorActive):
         :return: 
         '''
         while self.is_running():
-            self.data_received(self.collecting)
+            self.data_received(int(self.power))
             self.sleep(5)
