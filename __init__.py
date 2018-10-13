@@ -2,6 +2,6 @@
 
 import headsStep
 import heartsStep
-import pickingSensor
-import pickingActor
+import collectingSensor
+import collectingActor
 import powerSensor

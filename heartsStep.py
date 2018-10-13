@@ -2,13 +2,13 @@
 
 from modules.core.props import Property, StepProperty
 from modules.core.step import StepBase
-from rectifyBaseStep import RectifyBaseStep
+from baseColletingStep import BaseColletingStep
 from modules import cbpi
 
 @cbpi.step
-class HeartsStep(StepBase, RectifyBaseStep):
+class HeartsStep(StepBase, BaseColletingStep):
     temperatureSensor = StepProperty.Sensor("Temperature sensor", description="Temperature sensor inside pot-still")
-    powerSensor = StepProperty.Sensor("Heater power sensor", description="Required for picking speed calculation")
+    powerSensor = StepProperty.Sensor("Heater power sensor", description="Required for collecting speed calculation")
     endTemp = Property.Number("Completion temperature, degree Celsius", configurable=True, default_value=93)
     refluxRatio = Property.Number("Reflux ratio", configurable=True, default_value=3)
     
@@ -17,7 +17,7 @@ class HeartsStep(StepBase, RectifyBaseStep):
     heaterPower = 0
 
     def finish(self):
-        self.actor_off(int(self.pickingActor))
+        self.actor_off(int(self.collectingActor))
         self.notify("", "Collecting hearts completed", type="success", timeout=2000)
 
     def execute(self):

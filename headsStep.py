@@ -2,12 +2,12 @@
 
 from modules.core.props import Property, StepProperty
 from modules.core.step import StepBase
-from rectifyBaseStep import RectifyBaseStep
+from baseColletingStep import BaseColletingStep
 from modules import cbpi
 from datetime import datetime
 
 @cbpi.step
-class HeadsStep(StepBase, RectifyBaseStep):
+class HeadsStep(StepBase, BaseColletingStep):
     collectingSpeed = Property.Number("Heads collecting speed, ml/h", configurable=True, default_value=100)
     headsTotal = Property.Number("Heads total, ml", configurable=True, default_value=100)
     
@@ -15,7 +15,7 @@ class HeadsStep(StepBase, RectifyBaseStep):
     time = datetime.utcnow()
 
     def finish(self):
-        self.actor_off(int(self.pickingActor))
+        self.actor_off(int(self.collectingActor))
         self.notify("", "Collecting heads completed", type="success", timeout=2000)
 
     def execute(self):

@@ -3,8 +3,8 @@
 from modules.core.props import Property, StepProperty
 from modules import cbpi
 
-class RectifyBaseStep(object):
-    pickingActor = StepProperty.Actor("Collecting actor", description="Collecting device")
+class BaseColletingStep(object):
+    collectingActor = StepProperty.Actor("Collecting actor", description="Collecting device")
     collectingSensor = StepProperty.Sensor("Collecting indicator", description="Shows the rate of selection")
 
     isPaused = False
@@ -33,13 +33,13 @@ class RectifyBaseStep(object):
 
     def updateMaxCollectingSpeed(self):
         try:
-            actor = self.api.cache.get("actors").get(int(self.pickingActor)).instance
+            actor = self.api.cache.get("actors").get(int(self.collectingActor)).instance
             self.maxSpeed = actor.get_max_speed()
         except:
             self.maxSpeed = 0
 
     def manageActor(self):
-        actorId = int(self.pickingActor)
+        actorId = int(self.collectingActor)
         self.actor_power(power=self.power, id=actorId)
         if self.isPaused:
             self.actor_off(self.actorId())

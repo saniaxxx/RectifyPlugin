@@ -12,7 +12,7 @@ except Exception as e:
 
 
 @cbpi.actor
-class PickingActor(GPIOPWM):
+class CollectingActor(GPIOPWM):
     maxSpeed = Property.Number("Maximum collecting speed of actor, ml/h", configurable=True, default_value=1000)
 
     def get_max_speed(self):

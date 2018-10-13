@@ -5,7 +5,7 @@ from modules.core.hardware import  SensorActive
 from modules.core.props import Property
 
 @cbpi.sensor
-class PickingSensor(SensorActive):
+class CollectingSensor(SensorActive):
     collecting = 0
 
     def get_unit(self):
