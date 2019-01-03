@@ -4,4 +4,3 @@ import headsStep
 import heartsStep
 import collectingSensor
 import collectingActor
-import powerSensor

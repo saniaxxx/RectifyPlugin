@@ -30,7 +30,7 @@ class HeartsStep(StepBase, BaseColletingStep):
         a = - 76.923
         b = 7538.561
         k = (a * self.temperature + b) / 1000
-        k = min(k, 1) if k > 0 else 0
+        k = min(k, 1)
         self.collectingSpeed = int(self.initialCollecting * k)
 
     def updateAndCheckTemperature(self):
