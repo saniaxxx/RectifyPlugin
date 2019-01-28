@@ -29,9 +29,9 @@ class HeartsStep(StepBase, BaseColletingStep):
     def recountCollecting(self):
         a = - 76.923
         b = 7538.561
-        k = (a * self.temperature + b) / 1000
+        k = (a * float(self.temperature) + b) / 1000
         k = min(k, 1) if k > 0 else 0
-        self.collectingSpeed = int(self.initialCollecting * k)
+        self.collectingSpeed = int(self.initialCollecting) * k
 
     def updateAndCheckTemperature(self):
         self.temperature = float(self.get_sensor_value(int(self.temperatureSensor)))
