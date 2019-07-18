@@ -42,7 +42,7 @@ class BaseColletingStep(object):
         actorId = int(self.collectingActor)
         self.actor_power(power=self.power, id=actorId)
         if self.isPaused:
-            self.actor_off(self.actorId())
+            self.actor_off(actorId)
         else:
             self.actor_on(power=self.power, id=actorId)
 
