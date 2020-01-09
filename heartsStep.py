@@ -7,16 +7,16 @@ from modules import cbpi
 
 @cbpi.step
 class HeartsStep(StepBase, BaseColletingStep):
-    temperatureSensor = StepProperty.Sensor("Temperature sensor", description="Temperature sensor inside pot-still")
-    initialCollecting = Property.Number("Initial collecting, ml/h", configurable=True, default_value=1000)
-    endTemp = Property.Number("Completion temperature, degree Celsius", configurable=True, default_value=93)
+    temperatureSensor = StepProperty.Sensor("Датчик температуры", description="Датчик температуры в кубе")
+    initialCollecting = Property.Number("Стартовая скорость отбора, мл/ч", configurable=True, default_value=1000)
+    endTemp = Property.Number("Температура завершения отбора", configurable=True, default_value=93)
     
     collectingSpeed = 0.0
     temperature = 0
 
     def finish(self):
         self.actor_off(int(self.collectingActor))
-        self.notify("", "Collecting hearts completed", type="success", timeout=2000)
+        self.notify("", "Отбор тела завершен", type="success", timeout=2000)
 
     def execute(self):
         self.updateAndCheckTemperature()

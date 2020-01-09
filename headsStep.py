@@ -8,15 +8,15 @@ from datetime import datetime
 
 @cbpi.step
 class HeadsStep(StepBase, BaseColletingStep):
-    collectingSpeed = Property.Number("Heads collecting speed, ml/h", configurable=True, default_value=100)
-    headsTotal = Property.Number("Heads total, ml", configurable=True, default_value=100)
+    collectingSpeed = Property.Number("Скорость отбора, мл/ч", configurable=True, default_value=100)
+    headsTotal = Property.Number("Объем голов для отбора, мл", configurable=True, default_value=100)
     
     total = 0
     time = datetime.utcnow()
 
     def finish(self):
         self.actor_off(int(self.collectingActor))
-        self.notify("", "Collecting heads completed", type="success", timeout=2000)
+        self.notify("", "Отбор голов завершен", type="success", timeout=2000)
 
     def execute(self):
         self.updateMaxCollectingSpeed()

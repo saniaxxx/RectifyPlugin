@@ -15,9 +15,9 @@ except Exception as e:
 
 @cbpi.actor
 class CollectingActor(ActorBase):
-    gpio = Property.Select("GPIO", options=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27], description="GPIO to which the actor is connected")
-    period = Property.Number("Period (Sec)", configurable=True, default_value=8)
-    maxSpeed = Property.Number("Maximum collecting speed of actor, ml/h", configurable=True, default_value=2000)
+    gpio = Property.Select("GPIO", options=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27], description="Номер GPIO порта")
+    period = Property.Number("Период ШИМ (сек)", configurable=True, default_value=8)
+    maxSpeed = Property.Number("Скорость отбора при 100% ШИМ, мл/ч", configurable=True, default_value=2000)
     power = 100
     enabled = False
 

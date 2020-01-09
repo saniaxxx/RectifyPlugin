@@ -4,24 +4,24 @@ from modules.core.props import Property, StepProperty
 from modules import cbpi
 
 class BaseColletingStep(object):
-    collectingActor = StepProperty.Actor("Collecting actor", description="Collecting device")
-    collectingSensor = StepProperty.Sensor("Collecting indicator", description="Shows the rate of selection")
+    collectingActor = StepProperty.Actor("Устройство отбора", description="Исполнительное устройство отбора")
+    collectingSensor = StepProperty.Sensor("Индикатор отбора", description="Индикатор скорости отбора")
 
     isPaused = False
     power = 0
     maxSpeed = 0
 
-    @cbpi.action("Start collecting")
+    @cbpi.action("Начать отбор")
     def start(self):
         if self.isPaused:
             self.time = datetime.utcnow()
-            self.notify("", "Collecting continued", type="success", timeout=2000)
+            self.notify("", "Отбор продолжен", type="success", timeout=2000)
             self.isPaused = False
 
-    @cbpi.action("Stop collecting")
+    @cbpi.action("Остановить отбор")
     def stop(self):
         if not self.isPaused:
-            self.notify("", "Collecting paused", type="success", timeout=2000)
+            self.notify("", "Отбор приостановлен", type="success", timeout=2000)
             self.isPaused = True
 
     def notifySensor(self):

@@ -12,7 +12,7 @@ class CollectingSensor(SensorActive):
         '''
         :return: Unit of the sensor as string. Should not be longer than 3 characters
         '''
-        return "ml/h"
+        return "мл/ч"
 
     def execute(self):
         '''
