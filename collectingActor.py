@@ -26,14 +26,14 @@ class CollectingActor(ActorBase):
         GPIO.output(int(self.gpio), 0)
 
     def create_timer(self):
-        timeON = self.power / 100.0 * float(self.period)
-        timeOff = float(self.period) - timeON
+        timeOn = self.power / 100.0 * float(self.period)
+        timeOff = float(self.period) - timeOn
         if timeOff == 0:
             self.timer = Timer(float(self.period), self.switch)
         elif self.enabled:
-            self.timer = Timer(timeOff, self.switch)
+            self.timer = Timer(timeOn, self.switch)
         else:
-            self.timer = Timer(timeON, self.switch)
+            self.timer = Timer(timeOff, self.switch)
         self.timer.start()
 
     def switch(self):
