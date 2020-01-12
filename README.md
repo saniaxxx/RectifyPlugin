@@ -13,4 +13,5 @@ There are basic parameters for both modes:
 - Collecting Actor - I use solenoid plastic valve
 - Collecting indicator - for visual control of the collecting speed
 
+![interface](https://i.ibb.co/vdfbL15/2020-01-12-19-12-13.png)
 ![my column](https://i.ibb.co/wsKtndK/column.jpg)
