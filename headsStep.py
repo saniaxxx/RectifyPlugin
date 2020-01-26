@@ -27,7 +27,7 @@ class HeadsStep(StepBase, BaseColletingStep):
 
     def checkTotalCollecting(self):
         time = datetime.utcnow()
-        if (time-self.time).total_seconds() > 10:
+        if (time-self.time).total_seconds() >= 10:
             self.time = time
             self.total += float(self.collectingSpeed)/360.0
 

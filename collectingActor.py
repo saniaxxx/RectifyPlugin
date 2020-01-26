@@ -43,7 +43,7 @@ class CollectingActor(ActorBase):
         if self.enabled and self.power < 100:
             self.disable()
             self.enabled = False
-        else:
+        elif self.power > 0:
             self.enable()
             self.enabled = True
         self.create_timer()
@@ -61,6 +61,9 @@ class CollectingActor(ActorBase):
     def set_power(self, power):
         if power is not None:
             self.power = int(power)
+        if self.enabled and int(power) == 0:
+            self.disable()
+            self.enabled = False
 
     def stop(self):
         self.timer.cancel()
