@@ -10,7 +10,7 @@ try:
 
     GPIO.setmode(GPIO.BCM)
 except Exception as e:
-    print e
+    print(e)
     pass
 
 @cbpi.actor
@@ -70,11 +70,11 @@ class CollectingActor(ActorBase):
         self.timer = None
 
     def enable(self):
-        print "GPIO ON %s" % str(self.gpio)
+        print(("GPIO ON %s" % str(self.gpio)))
         GPIO.output(int(self.gpio), 1)
 
     def disable(self):
-        print "GPIO OFF"
+        print("GPIO OFF")
         GPIO.output(int(self.gpio), 0)
 
     def get_max_speed(self):

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import headsStep
-import heartsStep
-import startStopStep
-import periodicHeadsStep
-import collectingSensor
-import collectingActor
-import rcdController
+from . import headsStep
+from . import heartsStep
+from . import startStopStep
+from . import periodicHeadsStep
+from . import collectingSensor
+from . import collectingActor
+from . import rcdController

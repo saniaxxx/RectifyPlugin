@@ -2,7 +2,7 @@
 
 from modules.core.props import Property, StepProperty
 from modules.core.step import StepBase
-from baseColletingStep import BaseColletingStep
+from .baseColletingStep import BaseColletingStep
 from modules import cbpi
 from datetime import datetime
 

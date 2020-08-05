@@ -2,7 +2,7 @@
 
 from modules.core.props import Property, StepProperty
 from modules.core.step import StepBase
-from baseColletingStep import BaseColletingStep
+from .baseColletingStep import BaseColletingStep
 from modules import cbpi
 
 @cbpi.step
@@ -32,4 +32,4 @@ class HeartsStep(StepBase, BaseColletingStep):
     def updateAndCheckTemperature(self):
         self.temperature = float(self.get_sensor_value(int(self.temperatureSensor)))
         if self.temperature >= int(self.endTemp):
-            self.next()
+            next(self)

@@ -2,7 +2,7 @@
 
 from modules.core.props import Property, StepProperty
 from modules.core.step import StepBase
-from baseColletingStep import BaseColletingStep
+from .baseColletingStep import BaseColletingStep
 from modules import cbpi
 from datetime import datetime
 
@@ -32,4 +32,4 @@ class HeadsStep(StepBase, BaseColletingStep):
             self.total += float(self.collectingSpeed)/360.0
 
         if self.total >= int(self.headsTotal):
-            self.next()
+            next(self)
