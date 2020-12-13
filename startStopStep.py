@@ -33,13 +33,14 @@ class StartStopStep(StepBase, BaseColletingStep):
 
     def recountCollecting(self):
         if not self.currentCollecting:
-            self.currentCollecting = int(initialCollecting)
+            self.currentCollecting = int(self.initialCollecting)
         if not self.initialTemp:
             self.initialTemp = float(self.temperature)
-        excess = float(self.temperature) - self.initialTemp > float(self.deltaTemp)
-        if excess and not self.stopped:
-            self.currentCollecting = self.currentCollecting * (100 - int(decrement)) / 100
-        self.stopped = excess
+        if self.stopped:
+            self.stopped = float(self.temperature) > self.initialTemp
+        elif self.temperature and float(self.temperature) - self.initialTemp > float(self.deltaTemp):
+            self.stopped = True
+            self.currentCollecting = self.currentCollecting * (100 - int(self.decrement)) / 100
         self.collectingSpeed = 0 if self.stopped else self.currentCollecting
 
     def updateAndCheckTemperature(self):
